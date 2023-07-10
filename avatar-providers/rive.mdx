@@ -1,0 +1,32 @@
+---
+title: Rive
+---
+
+## Rive
+
+To integrate Rive avatars, you can explore all the great creative work on [rive community](https://rive.app/community/).
+
+Here is an exmaple of using a customized avatar from [@edofaravelli](https://rive.app/community/5160-10364-hey-ho-lets-go/)
+
+```jsx
+import { ElevenLabVoiceService } from '@avatechai/avatars';
+import { AvatarDisplay, AvatarChatBox } from '@avatechai/avatars/react';
+
+const riveAvatarUrl =
+  'https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/Marty.riv';
+export default function App() {
+  return (
+    <AvatarDisplay src={riveAvatarUrl}>
+        <AvatarChatBox />
+    </AvatarDisplay>
+  )
+}
+```
+
+<iframe src="https://codesandbox.io/embed/demo1-forked-n5kmj4?fontsize=14&hidenavigation=1&theme=dark"
+    width="100%"
+    height="500px"
+    title="demo1 (forked)"
+    allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+    sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>

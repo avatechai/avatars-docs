@@ -1,0 +1,21 @@
+---
+title: Loader Plugin
+---
+
+When you called the `useAvatar` hook to create `AvatechDisplay` canvasm, you need to import `loaderPlugin` in `avatarLoadingProps`
+before importing any avatar. It is needed in order to render your avatar on the canvas.
+
+```jsx
+import { RivePlugin } from "https://esm.sh/@avatechai/avatars@0.4.12-next.16/rive?bundle";
+
+const { Live2dPlugin } = await import(
+  "https://esm.sh/@avatechai/avatars@0.4.12-next.16/live2d?bundle"
+);
+
+const { avatarDisplay, context, handleFirstInteractionAudio } = useAvatar({
+  //...
+  avatarDisplayProps: {
+    loaderPlugin: [Live2dPlugin, RivePlugin],
+  },
+});
+```

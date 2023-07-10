@@ -1,0 +1,99 @@
+---
+title: Swift
+---
+
+### Installation
+
+Add Avatars Swift package from git.
+
+```
+https://github.com/avatechgg/avatars-swift.git
+```
+
+### Avatar Display on SwiftUI
+
+
+```swift
+import SwiftUI
+import Avatars
+
+struct ContentView: View {
+    
+    @StateObject var viewModel = AvatarViewModel(
+        text: Message(""),
+        avatarId: "5118f46f-2cb4-4ce1-9b75-f0ac659fc3fc",
+        speakerId: "0",
+        x: 0, // Model transition
+        y: 200,
+        scale: 1, // Model scale & rotation
+        rotation: 0,
+        // Mapped by Avatech | Avatar Studio
+        emotionGroup: [
+            "happy" : "lh.exp3.json",
+            "sad" : "hei.exp3.json",
+            "angry" : "sq.exp3.json",
+            "surprised" : "xx.exp3.json",
+            "neutral" : "zs2.exp3.json",
+            "mix" : "zs3.exp3.json"
+        ],
+        currentEmotion: "" // For emotion setting
+    )
+    
+    @State private var textInput = ""
+    
+    var body: some View {
+        VStack {
+            AvatarView(viewModel) // Avatar Display
+            HStack {
+                TextField("Enter text", text: $textInput)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                Button("Send") {
+                    text = Message(text:textInput)
+                    textInput = ""
+                }
+                .padding(.leading, 8)
+            }
+            .padding(.horizontal)
+            EmotionUIGroup(viewModel) // Emotion UI Mapping
+        }
+        .padding()
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+## EmotionUIGroup
+
+### struct EmotionGroup: View
+- Emotion UI Mapping
+- if `viewModel.emotionGroup` is null that will not be display.
+
+```swift
+struct EmotionUIGroup: View {
+    @ObservedObject var viewModel: AvatarViewModel
+    
+    init(_ viewModel: AvatarViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    var body: some View {
+        HStack {
+            if (viewModel.emotionGroup != nil) {
+                ForEach(Array(viewModel.emotionGroup!), id: \.0){ key, value in
+                    Button(key) {
+                        viewModel.currentEmotion = value
+                    }
+                }}
+        }
+    }
+}
+```
+
+## Webview Configuration
+- if `Outgoing Connections (Client)` doesn't on, webview will not work!
+![Webview config](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/CleanShot%202023-06-16%20at%2019.05.51.png)

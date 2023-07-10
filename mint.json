@@ -7,9 +7,9 @@
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#12A7D3",
-    "light": "#81D7F7",
-    "dark": "#004E7A"
+    "primary": "#12d38c",
+    "light": "#82f7c8",
+    "dark": "#007a55"
   },
   "topbarLinks": [
     {
@@ -29,25 +29,24 @@
   ],
   "navigation": [
     {
-      "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
+      "group": "Guides",
+      "pages": ["introduction", "getting-started", "basic-demo", "vercel-ai-demo"]
     },
     {
-      "group": "Essentials",
-      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
+      "group": "Integration",
+      "pages": ["integration/swift"]
+    },
+    {
+      "group": "Avatar providers",
+      "pages": ["avatar-providers/live2d", "avatar-providers/rive", "avatar-providers/loader-plugin"]
+    },
+    {
+      "group": "Voice providers",
+      "pages": ["voice-providers/elevenlabs"]
     },
     {
       "group": "API Documentation",
-      "pages": ["api-reference/authentication"]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
-      ]
+      "pages": ["api-reference/avatarLoadingProps", "api-reference/createAvatar", "api-reference/useAvatar"]
     }
   ],
   "footerSocials": {

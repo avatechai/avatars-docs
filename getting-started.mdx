@@ -1,0 +1,87 @@
+---
+title: "Getting started"
+description: "Build a simple web application showcasing your avatar in few step."
+---
+
+The avatars SDK support a wide range of platforms and languages. This tutorial will walk through how to build a
+simple web application showcasing your avatar using react + vite.
+
+<Note colors='#000000'>
+  This guide is aimed at novice web developers developing applications based on
+  TypeScript. If you are familiar with web coding, you may want to jump straight
+  into [next session](./docs/guides/langchain-rive).
+</Note>
+
+<Tabs>
+  <Tab title="npm">
+    ```bash 
+    npm create vite@latest my-new-avatars-app -- --template react-ts 
+    ```
+  </Tab>
+  <Tab title="pnpm">
+    ```bash 
+    pnpm create vite@latest my-new-avatars-app -- --template react-ts
+    ```  
+    </Tab>
+  <Tab title="yarn">
+    ```bash 
+    yarn create vite@latest my-new-avatars-app -- --template react-ts
+    ```
+  </Tab>
+</Tabs>
+
+## Installation
+
+After created a new project, install avatars SDK. You can also install any dependencies you need for your project.
+
+<Tabs>
+  <Tab title="npm">
+    ```bash 
+    npm i @avatechai/avatars
+    ```
+  </Tab>
+  <Tab title="pnpm">
+    ```bash 
+    pnpm i @avatechai/avatars
+    ```  
+    </Tab>
+  <Tab title="yarn">
+    ```bash 
+    yarn add @avatechai/avatars
+    ```
+  </Tab>
+</Tabs>
+
+<Info>
+  Avatars requires Node.js version 17.02+, please upgrade if your package
+  manager warns about it.
+</Info>
+
+## Basic Example in React
+
+You can replace the code of "App.tsx" with the code below and that's it!
+
+```jsx App.tsx
+import { AvatarDisplay } from "@avatechai/avatars/react";
+
+function App() {
+  return <AvatarDisplay avatarId="5118f46f-2cb4-4ce1-9b75-f0ac659fc3fc" />;
+}
+
+export default App;
+```
+
+<iframe
+  src="https://codesandbox.io/embed/demo1-8q3g7v?autoresize=1&codemirror=1&fontsize=14&hidenavigation=1&theme=dark&module=/src/App.tsx"
+  width="100%"
+  height="500px"
+  title="demo1"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+_Model created by 奈奈子＊DG 工作室@Live2D -> https://booth.pm/ja/items/4746187 using as demo purposes_
+
+## TypeScript Support
+
+The SDK is written in TypeScript and ships with type definitions.

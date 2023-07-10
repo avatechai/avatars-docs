@@ -1,0 +1,21 @@
+---
+title: createAvatar
+---
+
+`createAvatar` can create a custom [useAvatar](./useAvatar) hook to use in different component.
+
+### Create Avatar Props
+
+| Field                | description                                                               |
+| -------------------- | ------------------------------------------------------------------------- |
+| `emotionMapping`     | Ovrride the mapping of basic emotion to avatar type specific animation id |
+| `characterPrompt`    | Basic person prompt describing your character                             |
+| `avatarDisplayProps` | Specific avatar id, audio service                                         |
+
+#### characterPrompt
+
+| Field            | type     | description                                                               |
+| ---------------- | -------- | ------------------------------------------------------------------------- |
+| `name`           | string   | The name of you character                                                 |
+| `context`        | string   | The background story                                                      |
+| `exampleReplies` | string[] | Some example replies you wanted emphisze the characteristic of the avatar |

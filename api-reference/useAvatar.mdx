@@ -1,0 +1,66 @@
+---
+title: useAvatar
+date: 2023-07-04
+order: 56
+---
+
+<Note>
+  The hook is a low level api for temporary or single use. If you want to display the same avatar in different page
+  , we suggest you to check out [createAvatar](./createAvatar) function.
+</Note>
+
+You can use this hook to create the canvas displaying your avatar and also handle the part of
+connecting with different LLM with the help of vercel AI SDK `useChat` hook.
+
+Below is a example demonstrating usage of the hook.
+
+```jsx chat.tsx
+import { ElevenLabVoiceService } from "@avatechai/avatars";
+import { createAvatar } from "@avatechai/avatars/react";
+
+const useMyAvatar = createAvatar({
+  //...
+});
+
+const {
+  append,
+  messages,
+  isLoading,
+  //...
+} = useChat();
+
+const { avatarDisplay, context, handleFirstInteractionAudio } = useMyAvatar({
+  append: append,
+  messages: messages,
+  isLoading: isLoading,
+  avatarDisplayProps: {
+    y: 200,
+    className: "w-[24rem] h-[40rem]",
+  },
+});
+```
+
+## useAvatar options
+
+Options passed to useAvatar:
+
+### Create Avatar Props
+
+| Field                | description                                                                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `append`             | insert the `useChat` `append` function in this option, you can use the `append` from `useChat` as usual when integrating the chatbot experiences. |
+| `message`            | insert the ` useChat` `message ` array in this option.                                                                                             |
+| `isLoading`          | insert the `useChat` `isLoading` boolean in this option.                                                                                          |
+| `avatarDisplayProps` | An optional, extra props to be passed to the AvatarDisplay to adjust the avatar placement, layout and more.                                       |
+
+### Returns
+
+The `useAvatar` hook returns an object which containing different
+method and variables.
+
+| Field                         | type        | description                                                        |
+| ----------------------------- | ----------- | ------------------------------------------------------------------ |
+| `avatarDisplay`               | JSX.element | a canvas element to display your avatar.                           |
+| `context`                     | Object      | returning context of `avatarClient`                      |
+| `handleFirstInteractionAudio` | () => void  | Must call this function in order to grant permission to play audio |
+

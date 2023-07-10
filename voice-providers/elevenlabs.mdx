@@ -1,0 +1,64 @@
+---
+title: ElevenLabs
+date: 2021-12-24
+order: 1
+---
+
+## Elevenlabs
+
+Setting up with Elevenlabs allows you to use the Elevenlabs voice service with your avatar. The lip sync will happend under the hood automatically.
+
+### new `ElevenLabVoiceService`
+
+| Field     | description                                                                                                                                              |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apiKey`  | Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website. |
+| `modelId` | Identifier of the model that will be used, you can query them using GET /v1/models.                                                                      |
+| `voiceId` | Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.                                                   |
+
+For more information about ElevenLabs voice service check out [ElevenLabs](https://docs.elevenlabs.io/).
+
+## Examples
+
+### React - `AvatarDisplay`
+
+```jsx
+import { ElevenLabVoiceService } from "@avatechai/avatars";
+import { AvatarDisplay } from "@avatechai/avatars/react";
+
+const elevenLab = new ElevenLabVoiceService(
+  "<apiKey>",
+  "eleven_monolingual_v1",
+  "<voiceId>"
+);
+
+export default function App() {
+  return (
+    <AvatarDisplay
+      audioService={elevenLab}
+      //...
+    />
+  );
+}
+```
+
+### React - `createAvatar`
+
+For using createAvatar hook check out [createAvatar](/docs/guides/chatbot-demo) for more information.
+
+```jsx
+import { ElevenLabVoiceService } from "@avatechai/avatars";
+import { createAvatar } from "@avatechai/avatars/react";
+
+const useMyAvatar = createAvatar({
+  //...
+  avatarDisplayProps: {
+    //...
+    audioService: new ElevenLabVoiceService(
+      "<apiKey>",
+      "eleven_monolingual_v1",
+      "<voiceId>"
+    ),
+  },
+});
+```

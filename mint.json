@@ -1,9 +1,9 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Avatars",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/ava.svg",
+    "light": "/logo/ava.svg"
   },
   "favicon": "/favicon.png",
   "colors": {
@@ -17,10 +17,7 @@
       "url": "./"
     }
   ],
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
-  },
+
   "tabs": [
     {
       "name": "API Reference",

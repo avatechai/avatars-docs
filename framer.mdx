@@ -1,6 +1,7 @@
 ---
 title: Framer Demo
 ---
+
 You can easily create your AI chatbot and basic UI with the help of [Framer](https://www.framer.com/).
 
 ## Create a framer project
@@ -15,9 +16,22 @@ Click the 'Assets' tap in the top-left corner, Then create two Code components b
 
 You can freely name the file. In this guide, we will name it 'Chat' and 'Avatar'.
 
+<video
+  className="w-full aspect-video"
+  autoPlay
+  loop
+  controls
+  src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/avatars-does/createCode.mp4"
+></video>
 ## Overwrite the code
 
 Overwrite two code components with the code below:
+
+<Info>
+You need to replace the audio service apikey, voice id and LLM endpoint to interact with your avatar.
+You can learn more about our supported audio service and LLM in [this session](/basic-demo#make-your-avatar-alive).
+</Info>
+
 <CodeGroup>
 ```jsx Avatar.tsx
 import Avatars from "https://framer.com/m/Avatars-TgZa.js@Vh7nkX7l5OepKtsHbDxA"
@@ -44,13 +58,22 @@ export default function Avatar(props) {
 ```
 
 ```jsx Chat.tsx
-import AvatarChatbox from "https://framer.com/m/AvatarChatbox-Bani.js@buFsDYazJAEzxX8BLP05"
+import AvatarChatbox from "https://framer.com/m/AvatarChatbox-Bani.js@buFsDYazJAEzxX8BLP05";
 
 export default function Chat(props) {
-    return <AvatarChatbox />
+  return <AvatarChatbox />;
 }
 ```
+
 </CodeGroup>
+
+<video
+  className="w-full aspect-video"
+  autoPlay
+  controls
+  loop
+  src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/avatars-does/paste.mp4"
+></video>
 
 ## Import code components
 
@@ -58,9 +81,16 @@ After saving two components, You can simply drag & drop these two component into
 
 If you want to make the demo mobile-responsive, you can hover the 'Desktop' frame and click the 'breakpoint' button on the top-right to create tablet view and phone view.
 
+<video
+  className="w-full aspect-video"
+  autoPlay
+  loop
+  controls
+  src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/avatars-does/dragndrop.mp4"
+></video>
+
 ## Publishing the demo
 
-After publishing your demo to the domain framer provided, a basic ai chatbot demo will be shown in the domain. It will be usable after you fill in audioService key and LLM endpoint.
-You can learn more about our supported audio service and LLM in [this session](/basic-demo#make-your-avatar-alive)
+After publishing your demo to the domain framer provided, a basic ai chatbot demo will be shown in the domain.
 
-You can also customize your ai chatbot by filling in `characterPrompt`. 
+You can also customize your ai chatbot by filling in `characterPrompt`.

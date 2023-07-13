@@ -49,5 +49,10 @@
   "footerSocials": {
     "twitter": "https://twitter.com/avatech_gg"
   },
-  "backgroundImage": "/background.png"
+  "backgroundImage": "/background.png",
+  "analytics": {
+    "amplitude": {
+        "apiKey": "28d1cda92875d601f5d17c05e2d6abee"
+    }
+}
 }

@@ -27,7 +27,7 @@
   "navigation": [
     {
       "group": "Guides",
-      "pages": ["introduction", "getting-started", "basic-demo", "vercel-ai-demo"]
+      "pages": ["introduction", "getting-started", "basic-demo", "vercel-ai-demo", "framer"]
     },
     {
       "group": "Integration",

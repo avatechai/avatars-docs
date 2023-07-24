@@ -79,9 +79,14 @@ You can replace the code of "App.tsx" with the code below and that's it!
 
 ```jsx App.tsx
 import { AvatarDisplay } from "@avatechai/avatars/react";
+import { RivePlugin } from "@avatechai/avatars/rive";
+import { Live2dPlugin } from "@avatechai/avatars/live2d";
 
 function App() {
-  return <AvatarDisplay avatarId="5118f46f-2cb4-4ce1-9b75-f0ac659fc3fc" />;
+  return <AvatarDisplay
+            avatarLoaders={[Live2dPlugin, RivePlugin]}
+            // Displaying Live2D & Rive model
+            avatarId="5118f46f-2cb4-4ce1-9b75-f0ac659fc3fc" />;
 }
 
 export default App;

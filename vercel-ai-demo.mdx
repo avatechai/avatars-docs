@@ -4,11 +4,10 @@ title: Vercel AI Chatbot Demo
 
 ## Integrate with Vercel AI SDK
 
-<Note
-  title="Note"
-  type="note"
->
-  This demo shows how to integrate with Vercel AI SDK https://github.com/vercel-labs/ai-chatbot to create a chatbot with avatar display.
+<Note title='Note' type='note'>
+  This demo shows how to integrate with Vercel AI SDK
+  https://github.com/vercel-labs/ai-chatbot to create a chatbot with avatar
+  display.
 </Note>
 
 Using the `createAvatar` hook creator, gives you helper config to setup your avatar persona easily with emotion mapping.
@@ -27,7 +26,11 @@ const useMyAvatar = createAvatar({
     ]
   },
   avatarDisplayProps: {
-    audioService: ,
+    audioService: new ElevenLabVoiceService(
+      "<apiKey>",
+      "eleven_monolingual_v1",
+      "<voiceId>"
+    ),
     avatarId: 'avatarId',
   }
 })
@@ -43,7 +46,7 @@ const useNahida = createAvatar({
     angry: 'sq.exp3.json',
     surprised: 'xx.exp3.json',
     neutral: 'zs2.exp3.json',
-    mix: 'zs3.exp3.json'
+    mix: 'zs3.exp3.json',
   },
   characterPrompt: {
     name: 'Nahida',
@@ -60,8 +63,8 @@ const useNahida = createAvatar({
     exampleReplies: [
       'I am Nahida, a playable Dendro character in Genshin Impact.',
       'Have you played genshin impact today?',
-      'I am feel a bit sad'
-    ]
+      'I am feel a bit sad',
+    ],
   },
   avatarDisplayProps: {
     audioService: new ElevenLabVoiceService(
@@ -70,15 +73,13 @@ const useNahida = createAvatar({
       'QhxzYbewunyK1DkQ9rHC'
     ),
     avatarId: '5118f46f-2cb4-4ce1-9b75-f0ac659fc3fc',
-  }
+  },
 })
-
 ```
 
 Using the avatar hook you created!
 
 ```jsx chat.tsx
-
 // Using the hook
 const { handleFirstInteractionAudio, avatarDisplay } = useNahida({
   append: append,
@@ -88,14 +89,12 @@ const { handleFirstInteractionAudio, avatarDisplay } = useNahida({
     className:
       '!fixed inset-x-0 bottom-0 mx-auto h-[36rem] w-full sm:max-w-2xl sm:px-4 ',
     y: 200,
-    x: 120
-  }
+    x: 120,
+  },
 })
 
 // Including the avatar display in your react tree
-return <>
-  {avatarDisplay}
-</>
+return <>{avatarDisplay}</>
 ```
 
 Make sure to trigger the audio playback setup on first interaction
@@ -105,7 +104,7 @@ Make sure to trigger the audio playback setup on first interaction
   id={id}
   isLoading={isLoading}
   stop={stop}
-  append={input => {
+  append={(input) => {
     handleFirstInteractionAudio()
     return append(input)
   }}

@@ -78,15 +78,22 @@ After created a new project, install avatars SDK. You can also install any depen
 You can replace the code of "App.tsx" with the code below and that's it!
 
 ```jsx App.tsx
-import { AvatarDisplay } from "@avatechai/avatars/react";
-import { RivePlugin } from "@avatechai/avatars/rive";
-import { Live2dPlugin } from "@avatechai/avatars/live2d";
+import { useAvatar } from '@avatechai/avatars/react'
+import {
+  defaultAvatarLoaders,
+  defaultBlendshapesService,
+} from '@avatechai/avatars/default-loaders'
 
 function App() {
-  return <AvatarDisplay
-            avatarLoaders={[Live2dPlugin, RivePlugin]}
-            // Displaying Live2D & Rive model
-            avatarId="5118f46f-2cb4-4ce1-9b75-f0ac659fc3fc" />;
+  const { avatarDisplay } = useAvatar({
+    // Avatar State
+    avatarId: '5118f46f-2cb4-4ce1-9b75-f0ac659fc3fc',
+
+    // Loader + Plugins
+    avatarLoaders: defaultAvatarLoaders,
+    blendshapesService: defaultBlendshapesService,
+  })
+  return <>{avatarDisplay}</>
 }
 
 export default App;

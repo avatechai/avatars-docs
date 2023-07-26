@@ -4,15 +4,19 @@
   "modeToggle": {
     "default": "light"
   },
+  "topbarCtaButton": {
+    "url": "https://labs.avatech.ai",
+    "name": "Generate avatar"
+  },
   "logo": {
     "dark": "/logo/ava.svg",
     "light": "/logo/ava.svg"
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#12d38c",
-    "light": "#82f7c8",
-    "dark": "#007a55"
+    "primary": "#119665",
+    "light": "#f7eb82",
+    "dark": "#f5de22"
   },
   "topbarLinks": [
     {

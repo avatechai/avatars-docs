@@ -1,0 +1,27 @@
+---
+title: "Voice"
+---
+
+## ElevenLabs
+
+Setting up with Elevenlabs allows you to use the Elevenlabs voice service with your avatar. The lip sync will happend under the hood automatically.
+
+### `ElevenLabsVoiceService`
+
+| Field     | description                                                                                                                                              |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apiKey`  | Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website. |
+| `modelId` | Identifier of the model that will be used, you can query them using GET /v1/models.                                                                      |
+| `voiceId` | Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.                                                   |
+
+For more information about ElevenLabs voice service check out [ElevenLabs](https://docs.elevenlabs.io/).
+
+```jsx
+import { ElevenLabsVoiceService } from "@avatechai/avatars/voice";
+
+const elevenLab = new ElevenLabsVoiceService(
+  "<apiKey>",
+  "eleven_monolingual_v1",
+  "<voiceId>"
+);
+```

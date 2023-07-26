@@ -18,49 +18,29 @@
     "light": "#f7eb82",
     "dark": "#eab308"
   },
-  "topbarLinks": [
+  "anchors": [
     {
-      "name": "Documentation",
-      "url": "./"
-    }
-  ],
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
+      "name": "Discord",
+      "icon": "discord",
+      "url": "https://discord.gg/ePXqH78McC"
     }
   ],
   "navigation": [
     {
       "group": "Guides",
-      "pages": ["introduction", "getting-started", "basic-demo", "vercel-ai-demo", "nextjs-demo", "framer"]
-    },
-    {
-      "group": "Integration",
-      "pages": []
-    },
-    {
-      "group": "Avatar providers",
-      "pages": []
-    },
-    {
-      "group": "Voice providers",
       "pages": [
-        "voice-providers/elevenlabs"
+        "guides/introduction",
+        "guides/why",
+        "guides/installation",
+        "guides/nextjs-demo"
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "Stack",
       "pages": [
-        "api-reference/avatarLoadingProps",
-        "api-reference/createAvatar",
-        "api-reference/useAvatar"
-      ]
-    },
-    {
-      "group": "Blend Shapes",
-      "pages": [
-        "blendshape"
+        "stack/avatar",
+        "stack/voice",
+        "stack/llm"
       ]
     }
   ],

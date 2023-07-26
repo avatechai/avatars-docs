@@ -33,27 +33,15 @@
   "navigation": [
     {
       "group": "Guides",
-      "pages": [
-        "introduction",
-        "getting-started",
-        "basic-demo",
-        "vercel-ai-demo",
-        "framer"
-      ]
+      "pages": ["introduction", "getting-started", "basic-demo", "vercel-ai-demo", "nextjs-demo", "framer"]
     },
     {
       "group": "Integration",
-      "pages": [
-        "integration/swift"
-      ]
+      "pages": []
     },
     {
       "group": "Avatar providers",
-      "pages": [
-        "avatar-providers/live2d",
-        "avatar-providers/rive",
-        "avatar-providers/loader-plugin"
-      ]
+      "pages": []
     },
     {
       "group": "Voice providers",

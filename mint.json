@@ -1,6 +1,9 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "Avatars",
+  "modeToggle": {
+    "default": "light"
+  },
   "logo": {
     "dark": "/logo/ava.svg",
     "light": "/logo/ava.svg"
@@ -17,7 +20,6 @@
       "url": "./"
     }
   ],
-
   "tabs": [
     {
       "name": "API Reference",
@@ -27,27 +29,47 @@
   "navigation": [
     {
       "group": "Guides",
-      "pages": ["introduction", "getting-started", "basic-demo", "vercel-ai-demo", "framer"]
+      "pages": [
+        "introduction",
+        "getting-started",
+        "basic-demo",
+        "vercel-ai-demo",
+        "framer"
+      ]
     },
     {
       "group": "Integration",
-      "pages": ["integration/swift"]
+      "pages": [
+        "integration/swift"
+      ]
     },
     {
       "group": "Avatar providers",
-      "pages": ["avatar-providers/live2d", "avatar-providers/rive", "avatar-providers/loader-plugin"]
+      "pages": [
+        "avatar-providers/live2d",
+        "avatar-providers/rive",
+        "avatar-providers/loader-plugin"
+      ]
     },
     {
       "group": "Voice providers",
-      "pages": ["voice-providers/elevenlabs"]
+      "pages": [
+        "voice-providers/elevenlabs"
+      ]
     },
     {
       "group": "API Documentation",
-      "pages": ["api-reference/avatarLoadingProps", "api-reference/createAvatar", "api-reference/useAvatar"]
+      "pages": [
+        "api-reference/avatarLoadingProps",
+        "api-reference/createAvatar",
+        "api-reference/useAvatar"
+      ]
     },
     {
       "group": "Blend Shapes",
-      "pages": ["blendshape"]
+      "pages": [
+        "blendshape"
+      ]
     }
   ],
   "footerSocials": {
@@ -56,7 +78,7 @@
   "backgroundImage": "/background.png",
   "analytics": {
     "amplitude": {
-        "apiKey": "28d1cda92875d601f5d17c05e2d6abee"
+      "apiKey": "28d1cda92875d601f5d17c05e2d6abee"
     }
-}
+  }
 }

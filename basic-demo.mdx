@@ -37,8 +37,12 @@ To get this started, You need to provide a audio service API key and put key ins
 You should also provide a mouth-sync supported avatar and put the url or file inside the "AvatarDisplay" tag.
 
 ```jsx
-import { AvatarDisplay } from "@avatechai/avatars/react";
-import { RivePlugin } from "@avatechai/avatars/rive";
+import { useState } from 'react'
+import { useAvatar } from '@avatechai/avatars/react'
+import {
+  defaultAvatarLoaders,
+  defaultBlendshapesService,
+} from '@avatechai/avatars/default-loaders'
 
 // you can replace the url with any rive model that support mouth-sync.
 const riveAvatarUrl = 'https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/hey%2C_ho%21_let%27s_go%21.riv';
@@ -50,7 +54,27 @@ const elevenLab = new ElevenLabVoiceService(
 );
 
 function App() {
-  return <AvatarDisplay avatarLoader={[RivePlugin]} src={riveAvatarUrl} audioService={elevenLab}/>;
+  const [text, setText] = useState('');
+  const { avatarDisplay, handleFirstInteractionAudio } = useAvatar({
+    text: text,
+    // Avatar State
+    src: riveAvatarUrl,
+    // Loader + Plugins
+    avatarLoaders: defaultAvatarLoaders,
+    audioService: elevenLab,
+  })
+  return(
+  <>
+    {avatarDisplay}
+    <button
+      onClick={() => {
+        setText('hi')
+      }}
+    >
+      send it
+    </button>
+  </>
+  )
 }
 ```
 

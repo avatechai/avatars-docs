@@ -44,6 +44,10 @@
     {
       "group": "API Documentation",
       "pages": ["api-reference/avatarLoadingProps", "api-reference/createAvatar", "api-reference/useAvatar"]
+    },
+    {
+      "group": "Blend Shapes",
+      "pages": ["blendshape"]
     }
   ],
   "footerSocials": {

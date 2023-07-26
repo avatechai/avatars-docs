@@ -14,9 +14,9 @@
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#119665",
+    "primary": "#eab308",
     "light": "#f7eb82",
-    "dark": "#f5de22"
+    "dark": "#eab308"
   },
   "topbarLinks": [
     {

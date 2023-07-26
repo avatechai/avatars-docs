@@ -31,8 +31,14 @@
       "pages": [
         "guides/introduction",
         "guides/why",
-        "guides/installation",
-        "guides/nextjs-demo"
+        "guides/installation"
+      ]
+    },
+    {
+      "group": "Demo",
+      "pages": [
+        "guides/nextjs-demo",
+        "framer"
       ]
     },
     {

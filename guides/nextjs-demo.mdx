@@ -18,6 +18,8 @@ For a complete demo and GitHub repo, you can check this out directly.
     With Next JS, Vercel AI, a simple chat with avatar experience.
 </Card>
 
+### Setup
+
 Clone and try out the repo demo!
 
 <Tabs>
@@ -26,7 +28,7 @@ Clone and try out the repo demo!
     npx degit avatechgg/avatars-nextjs-demo avatars-nextjs-demo
     ```
   </Tab>
-  <Tab title="Git Clone">
+  <Tab title="git clone">
     ```bash
     git clone https://github.com/avatechgg/avatars-nextjs-demo.git
     ```
@@ -41,7 +43,21 @@ pnpm install
 pnpm dev
 ```
 
-### Setup
+{/* <Note title='Note' type='note'>
+  This demo shows how to integrate with Vercel AI SDK, visit this get started with Vercel AI SDK
+  https://sdk.vercel.ai/docs/guides/openai#guide-chat-bot
+</Note> */}
+
+
+{/* <Accordion title="Update .env keys"> */}
+The demo request for [OpenAI API](https://platform.openai.com/account/api-keys) key and [Eleven Labs API](https://docs.elevenlabs.io/api-reference/quick-start/authentication) key. You can get the API key from the respective website.
+  ```jsx
+  OPENAI_API_KEY=""
+  NEXT_PUBLIC_ELEVEN_LABS_API_KEY=""
+  ```
+{/* </Accordion> */}
+
+### Explaination
 
 <Note title='Note' type='note'>
   This demo shows how to integrate with Vercel AI SDK, visit this get started with Vercel AI SDK
@@ -196,32 +212,3 @@ export default function Chat() {
   </Accordion>
 
 </AccordionGroup>
-
-{/* <RequestExample>
-```jsx useAvatar hook
-// If you want to integrate to existing application, 
-const { avatarDisplay, handleFirstInteractionAudio, availableEmotions, context } = useAvatar({
-  // Avatar State
-  text: text,
-  currentEmotion: currentEmotion,
-  avatarId: 'af3f42c9-d1d7-4e14-bd81-bf2e05fd11a3',
-  // Loader + Plugins
-  avatarLoaders: defaultAvatarLoaders,
-  blendshapesService: defaultBlendshapesService_2,
-  audioService: elevenLabs,
-  // Style Props
-  scale: 4,
-  className: 'w-[400px] h-[400px]',
-})
-```
-</RequestExample>
-
-<ResponseExample>
-```jsx Render the avatarDisplay
-<>
-  {avatarDisplay}
-</>
-```
-</ResponseExample> */}
-
-

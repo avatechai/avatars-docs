@@ -48,6 +48,12 @@
         "stack/voice",
         "stack/llm"
       ]
+    },
+    {
+      "group": "More",
+      "pages": [
+        "faq"
+      ]
     }
   ],
   "footerSocials": {

@@ -1,0 +1,22 @@
+---
+title: FAQ
+---
+
+## Technology used
+
+#### Avatar
+
+Our `Avatars` SDK currently provides web support. Depending on developer's integration and avatar type we have the following third party dependencies:
+- [Live2d](https://www.live2d.com/en/download/cubism-sdk/)
+- [Rive (MIT)](https://rive.app/runtimes)
+
+Which is used for rendering the avatar model on web.
+
+<Note>While the SDK will install the dependencies for you, you dont have to install the SDK yourself.</Note>
+
+The `Avatars` SDK is built as a pipeline on interfacing different avatars and bridging them closer to users. We are currently working on supporting more avatar types and platforms.
+
+### Blendshape
+
+The sdk will analyse the incoming audio and create blendshapes mappings for the avatar. Currently these thrid party libraries are used for the blendshape mapping:
+- [Talking Character (Apache 2.0)](https://github.com/google/generative-ai-docs/tree/main/demos/palm/web/talking-character)

@@ -24,12 +24,13 @@ A simple example of how to use display a generated avatar using the SDK.
 
 ```jsx useAvatar hook
 import { useAvatar } from '@avatechai/avatars/react';
-import { defaultAvatarLoaders } from '@avatechai/avatars/default-loaders';
+import { defaultAvatarLoaders, defaultBlendshapesService } from '@avatechai/avatars/default-loaders';
 
 const { avatarDisplay } = useAvatar({
   avatarId: 'af3f42c9-d1d7-4e14-bd81-bf2e05fd11a3',
   // Loader + Plugins
   avatarLoaders: defaultAvatarLoaders,
+  blendshapesService: defaultBlendshapesService,
   // Style Props
   scale: 4,
   className: 'w-[400px] h-[400px]',

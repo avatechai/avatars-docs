@@ -38,7 +38,8 @@
       "group": "Demo",
       "pages": [
         "guides/nextjs-demo",
-        "framer"
+        "framer",
+        "weather-demo"
       ]
     },
     {

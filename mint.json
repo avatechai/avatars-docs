@@ -31,14 +31,14 @@
       "pages": [
         "guides/introduction",
         "guides/why",
-        "guides/installation"
+        "guides/installation",
+        "guides/avatar-customization"
       ]
     },
     {
       "group": "Demo",
       "pages": [
         "guides/nextjs-demo",
-        "framer",
         "weather-demo"
       ]
     },

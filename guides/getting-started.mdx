@@ -4,7 +4,7 @@ description: "Build a simple web application showcasing your avatar in few step.
 ---
 
 The avatars SDK support a wide range of platforms and languages. This tutorial will walk through how to build a
-simple web application showcasing your avatar using react + vite.
+simple web application showcasing your avatar using react-ts + vite.
 
 <Note colors='#000000'>
   This guide is aimed at novice web developers developing applications based on
@@ -79,10 +79,7 @@ You can replace the code of "App.tsx" with the code below and that's it!
 
 ```jsx App.tsx
 import { useAvatar } from '@avatechai/avatars/react'
-import {
-  defaultAvatarLoaders,
-  defaultBlendshapesService,
-} from '@avatechai/avatars/default-loaders'
+import { defaultAvatarLoaders } from '@avatechai/avatars/default-loaders'
 
 function App() {
   const { avatarDisplay } = useAvatar({
@@ -91,7 +88,6 @@ function App() {
 
     // Loader + Plugins
     avatarLoaders: defaultAvatarLoaders,
-    blendshapesService: defaultBlendshapesService,
   })
   return <>{avatarDisplay}</>
 }

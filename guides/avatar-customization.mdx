@@ -1,0 +1,72 @@
+---
+title: "Avatar Customization"
+---
+
+## Create avatars
+
+You can generate avatars from our [labs](https://labs.avatech.ai). With the help of text-to-image AI model, you can create different avatar by only describing your imagination.
+
+After generated your avatar, you can click the 'view code' button at the top-right corner to copy the avatarId. Then replace the avatarId inside the 'useAvatar' hook.
+
+<video
+  className="w-full aspect-video"
+  autoPlay
+  loop
+  controls
+  src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/avatars-does/npmi.mp4"
+></video>
+
+## Avatar refinement
+
+We provide different services to make your own avatar comes alive:
+
+<AccordionGroup>
+  <Accordion title="Lip-sync">
+    The avatars generated from our labs support real-time lip-sync based on audio provided to our sdk.
+
+    To make your avatar start talking, you need to first create a new **externalAvatarVoiceService**.
+
+    ```jsx
+    const externalAvatarVoiceService = new ExternalVoiceSourceService();
+    ```
+
+    Then you need to call setAudioContextAndSource() hook from externalAvatarVoiceService to set the audioContext and audioPlayer.
+
+    ```jsx
+    externalAvatarVoiceService.setAudioContextAndSource(
+      audioContext,
+      audioPlayer
+    );
+    ```
+    Audio context and Audio Player can be created by the code below.
+
+    <Tabs>
+      <Tab title="Audio Context">
+        ```jsx
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        ```
+      </Tab>
+      <Tab title="Audio Player">
+        ```jsx
+        const audioPlayer = new Audio();
+        ```
+      </Tab>
+    </Tabs>
+
+    Once you start playing audio from the audioPlayer, your avatar will automatically start lip-sync!
+
+  </Accordion>
+
+  <Accordion title="Expression">
+    you can set the avatar expression by calling the function below:
+    ```jsx
+    context.current.client.setAvatarEmotion('your emotion')
+    ```
+
+    you can get all the emotion avatar supported by calling the function below:
+    ```jsx
+    context.current.client.getAvatarAllEmotion('your emotion')
+    ```
+    
+  </Accordion>
+</AccordionGroup>

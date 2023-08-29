@@ -2,6 +2,13 @@
 title: "Install SDK"
 ---
 
+You can install the SDK via Node Package Manager, Performant NPM or Yarn.
+
+<Info>
+  The SDK requires Node.js version 17.02+, please upgrade if your package
+  manager warns about it.
+</Info>
+
 <Tabs>
   <Tab title="npm">
     ```bash 
@@ -20,27 +27,34 @@ title: "Install SDK"
   </Tab>
 </Tabs>
 
-A simple example of how to use display a generated avatar using the SDK.
+Below is a simple example of how to display a generated avatar using the SDK.
 
-```jsx useAvatar hook
-import { useAvatar } from '@avatechai/avatars/react';
-import { defaultAvatarLoaders, defaultBlendshapesService } from '@avatechai/avatars/default-loaders';
+```jsx
+import { useState } from 'react'
+import { useAvatar } from '@avatechai/avatars/react'
+import {
+  defaultAvatarLoaders,
+} from '@avatechai/avatars/default-loaders'
 
-const { avatarDisplay } = useAvatar({
-  avatarId: 'af3f42c9-d1d7-4e14-bd81-bf2e05fd11a3',
-  // Loader + Plugins
-  avatarLoaders: defaultAvatarLoaders,
-  blendshapesService: defaultBlendshapesService,
-  // Style Props
-  scale: 4,
-  className: 'w-[400px] h-[400px]',
-})
-```
+function App() {
+  const { avatarDisplay } = useAvatar({
+    // Avatar State
+    avatarId: 'af3f42c9-d1d7-4e14-bd81-bf2e05fd11a3',
 
-```jsx Render the avatarDisplay
-<>
-  {avatarDisplay}
-</>
+    // Loader + Plugins
+    avatarLoaders: defaultAvatarLoaders,
+
+    // Style Props
+    scale: 4,
+  })
+  return(
+  <>
+    {avatarDisplay}
+  </>
+  ) 
+}
+
+export default App
 ```
 
 
@@ -56,5 +70,4 @@ const { avatarDisplay } = useAvatar({
   >
     With Next JS, Vercel AI, a simple chat with avatar experience.
   </Card>
-  
 </CardGroup>

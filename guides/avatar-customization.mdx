@@ -8,8 +8,6 @@ You can generate avatars from our [labs](https://labs.avatech.ai). With the help
 
 After generated your avatar, you can click the 'view code' button at the top-right corner to copy the avatarId. Then replace the avatarId inside the 'useAvatar' hook.
 
-
-
 ## Avatar refinement
 
 We provide different services to make your own avatar comes alive:
@@ -63,8 +61,7 @@ We provide different services to make your own avatar comes alive:
     If you want to handle the audio part yourself (For example, to adjust volume or adding eventlistener), you can pass different options into the function `audioInit()`:
 
     | Field            | type             |
-
-    | ---------------- | --------         |
+    | ---------------- | ---------------- |
     | `audioContext`   | AudioContext     |
     | `audioelement`   | HTMLAudioElement |
     | `audioSourceNode`| AudioNode        |
@@ -73,11 +70,11 @@ We provide different services to make your own avatar comes alive:
     const { avatarDisplay, context, audioInit } = useAvatar({
       //...
     });
-    
+
     const audioElement = new Audio()
     const audioContext = new (window.AudioContext || window.webkitAudioContext)()
     const audioSourceNode = audioContext.createMediaElementSource(audioElement)
-    
+
     //...
 
     return (
@@ -94,7 +91,7 @@ We provide different services to make your own avatar comes alive:
     )
     ```
 
-    Once the audioElement start playing, the avatar will start lip-sync based on the auioElement.
+    Once the audioElement start playing, the avatar will start lip-sync based on the audioElement.
 
   </Accordion>
 

@@ -8,13 +8,7 @@ You can generate avatars from our [labs](https://labs.avatech.ai). With the help
 
 After generated your avatar, you can click the 'view code' button at the top-right corner to copy the avatarId. Then replace the avatarId inside the 'useAvatar' hook.
 
-<video
-  className="w-full aspect-video"
-  autoPlay
-  loop
-  controls
-  src="https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/avatars-does/npmi.mp4"
-></video>
+
 
 ## Avatar refinement
 
@@ -22,43 +16,91 @@ We provide different services to make your own avatar comes alive:
 
 <AccordionGroup>
   <Accordion title="Lip-sync">
+
+    ### Basic lip-sync
+
     The avatars generated from our labs support real-time lip-sync based on audio provided to our sdk.
 
-    To make your avatar start talking, you need to first create a new **externalAvatarVoiceService**.
+    To make your avatar start talking, you need to first initialize the sdk audio service.
 
     ```jsx
-    const externalAvatarVoiceService = new ExternalVoiceSourceService();
+    const { avatarDisplay, context, audioInit } = useAvatar({
+      //...
+    });
+
+    //...
+
+    return (
+      <button onClick={() => {audioInit()}}>Init</button>
+    )
     ```
 
-    Then you need to call setAudioContextAndSource() hook from externalAvatarVoiceService to set the audioContext and audioPlayer.
+    <Info>
+      The `audioInit()` must be called after a user gesture due to security reason restricted by web browser.
+    </Info>
+
+    Then you can make your avatar start talking by calling the `play()` function with the source of the audio file.
 
     ```jsx
-    externalAvatarVoiceService.setAudioContextAndSource(
-      audioContext,
-      audioPlayer
-    );
+    const { avatarDisplay, context, audioInit } = useAvatar({
+      //...
+    });
+
+    //...
+
+    return (
+      <button onClick={() => {
+        context.current?.client?.play('your audio file src')
+        }}
+      >
+      Talk
+      </button>
+    )
     ```
-    Audio context and Audio Player can be created by the code below.
 
-    <Tabs>
-      <Tab title="Audio Context">
-        ```jsx
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        ```
-      </Tab>
-      <Tab title="Audio Player">
-        ```jsx
-        const audioPlayer = new Audio();
-        ```
-      </Tab>
-    </Tabs>
+    ### Advance Audio Customization
 
-    Once you start playing audio from the audioPlayer, your avatar will automatically start lip-sync!
+    If you want to handle the audio part yourself (For example, to adjust volume or adding eventlistener), you can pass different options into the function `audioInit()`:
+
+    | Field            | type             |
+
+    | ---------------- | --------         |
+    | `audioContext`   | AudioContext     |
+    | `audioelement`   | HTMLAudioElement |
+    | `audioSourceNode`| AudioNode        |
+
+    ```jsx
+    const { avatarDisplay, context, audioInit } = useAvatar({
+      //...
+    });
+    
+    const audioElement = new Audio()
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)()
+    const audioSourceNode = audioContext.createMediaElementSource(audioElement)
+    
+    //...
+
+    return (
+      <button
+        onClick={() => {audioInit({
+          audioElement: audioElement
+          audioContext: audioContext
+          audioSourceNode: audioSourceNode
+        })
+        }}
+      >
+       Init
+      </button>
+    )
+    ```
+
+    Once the audioElement start playing, the avatar will start lip-sync based on the auioElement.
 
   </Accordion>
 
   <Accordion title="Expression">
     you can set the avatar expression by calling the function below:
+    
     ```jsx
     context.current.client.setAvatarEmotion('your emotion')
     ```
@@ -67,6 +109,6 @@ We provide different services to make your own avatar comes alive:
     ```jsx
     context.current.client.getAvatarAllEmotion('your emotion')
     ```
-    
+
   </Accordion>
 </AccordionGroup>

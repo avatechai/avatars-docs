@@ -1,0 +1,130 @@
+---
+title: "Avatar Interaction"
+---
+
+Avatars can interact with several ways:
+
+## Lip-sync
+
+The avatars generated from [AvatarLabs](https://labs.avatech.ai) support real-time lip-sync based on audio provided to the SDK.
+
+To make your avatar start talking, you need to call `playAudioFromSource()` or `playAudioFromNode()` based on the audio type.
+
+```jsx
+function App(){
+    const {
+        avatarDisplay,
+        avatarContext,
+        playAudioFromSource,
+        playAudioFromNode
+    } = useAvatar({
+        //...
+    });
+
+    const audioContextRef = useRef<AudioContext>(new AudioContext());
+
+    return (
+        {avatarDisplay}
+        <button
+            onClick={() => {
+                const arrayBuffer = await fetch("audio.mp3")
+                    .then(async (res) => {
+                    const file = res.arrayBuffer();
+                    return file;
+                    })
+                    .catch((e) => console.error(e));
+
+                // if your audio is in file format,
+                // you need to convert it into array buffer first.
+
+                const audioBuffer =
+                    await audioContextRef.current.decodeAudioData(arrayBuffer);
+                const bs = audioContextRef.current.createBufferSource();
+                bs.buffer = audioBuffer;
+                playAudioFromNode(bs, audioContextRef.current);
+            }}
+        >
+            playAudioFromNode
+        </button>
+        <button
+            onClick={() => {
+                playAudioFromSource('audio.mp3', audioContextRef.current);
+                // both relative path and urls can be used with this method.
+            }}
+        >
+            playAudioFromSource
+        </button>
+    );
+}
+```
+
+<Info>
+  You can visit [here](./guides/nextjs-demo) for a complete demo shocasing how
+  our lip-sync system works!
+</Info>
+
+### Connect Audio Element
+
+If you want to adjust audio settings (For example, to adjust volume or adding eventlistener),
+you can create a new HTMLAudioElement and connect it to our sdk through the function `connectAudioElement()`:
+
+```jsx
+const { avatarDisplay, context, connectAudioElement } = useAvatar({
+  //...
+});
+
+const audioPlayer = useRef(new Audio())
+
+//...
+
+return (
+    {avatarDisplay}
+    <button
+        onClick={() => {
+          connectAudioElement(audioPlayer.current, audioContextRef.current);
+        }}
+    >
+        Connect
+    </button>
+
+    // then when you play the audioPlayer, the avatar will start lip-sync automatically.
+
+    <button
+        onClick={() => {
+          audioPlayer.current.src = "audio.mp3";
+          audioPlayer.current.play();
+        }}
+    >
+        Play
+    </button>
+)
+```
+
+<Warning>
+  You cannot connect audio element after using `playAudioFromNode()` or
+  `playAudioFromSource()` to play audio.
+</Warning>
+
+## Expression
+
+Avatars created from our creation suite support different expressions.
+
+<Info>
+  How many expression the avatar can make depends on which model you are using
+  to generate the avatar.
+</Info>
+
+```jsx
+const { avatarDisplay, availableEmotions, setEmotion } = useAvatar({
+  //...
+});
+return (
+  <button
+    onClick={() => {
+      setEmotion(availableEmotions[0]);
+    }}
+  >
+    Set emotion
+  </button>
+);
+```

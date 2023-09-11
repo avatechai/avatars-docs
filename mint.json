@@ -35,7 +35,9 @@
         "guides/installation",
         "guides/avatar-creation",
         "guides/avatar-interaction"
-      ]
+      ],
+      "version": "v2"
+
     },
     {
       "group": "Demo",
@@ -49,7 +51,8 @@
     },
     {
       "group": "Stack",
-      "pages": ["stack/avatar", "stack/voice", "stack/llm"]
+      "pages": ["stack/avatar", "stack/voice", "stack/llm"],
+      "version": "v1"
     },
     {
       "group": "More",

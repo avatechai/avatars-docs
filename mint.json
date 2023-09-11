@@ -8,6 +8,7 @@
     "url": "https://labs.avatech.ai",
     "name": "Generate avatar"
   },
+  "versions": ["v2", "v1"],
   "logo": {
     "dark": "/logo/ava.svg",
     "light": "/logo/ava.svg"
@@ -38,24 +39,21 @@
     },
     {
       "group": "Demo",
-      "pages": [
-        "guides/nextjs-demo",
-        "weather-demo"
-      ]
+      "pages": ["guides/nextjs-demo", "weather-demo"],
+      "version": "v1"
+    },
+    {
+      "group": "Demo",
+      "pages": ["guides/react-vite-demo"],
+      "version": "v2"
     },
     {
       "group": "Stack",
-      "pages": [
-        "stack/avatar",
-        "stack/voice",
-        "stack/llm"
-      ]
+      "pages": ["stack/avatar", "stack/voice", "stack/llm"]
     },
     {
       "group": "More",
-      "pages": [
-        "faq"
-      ]
+      "pages": ["faq"]
     }
   ],
   "footerSocials": {

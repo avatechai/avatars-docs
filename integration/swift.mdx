@@ -12,51 +12,50 @@ https://github.com/avatechgg/avatars-swift.git
 
 ### Avatar Display on SwiftUI
 
-
 ```swift
 import SwiftUI
 import Avatars
 
 struct ContentView: View {
-    
     @StateObject var viewModel = AvatarViewModel(
-        text: Message(""),
-        avatarId: "5118f46f-2cb4-4ce1-9b75-f0ac659fc3fc",
-        speakerId: "0",
-        x: 0, // Model transition
+        avatarId: "fb4051f8-5969-480f-b57b-fcfc66c5b6f6",
+
+        // Model transition
+        x: 0,
         y: 200,
-        scale: 1, // Model scale & rotation
+
+        // Model scale & rotation
+        scale: 1,
         rotation: 0,
-        // Mapped by Avatech | Avatar Studio
-        emotionGroup: [
-            "happy" : "lh.exp3.json",
-            "sad" : "hei.exp3.json",
-            "angry" : "sq.exp3.json",
-            "surprised" : "xx.exp3.json",
-            "neutral" : "zs2.exp3.json",
-            "mix" : "zs3.exp3.json"
-        ],
-        currentEmotion: "" // For emotion setting
+
+        // For emotion setting
+        currentEmotion: ""
     )
-    
+
     @State private var textInput = ""
-    
+
     var body: some View {
         VStack {
-            AvatarView(viewModel) // Avatar Display
+            AvatarView(viewModel)
             HStack {
-                TextField("Enter text", text: $textInput)
+                TextField("Enter audio source", text: $textInput)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 Button("Send") {
-                    text = Message(text:textInput)
-                    textInput = ""
+                    viewModel.audioSource = textInput
                 }
                 .padding(.leading, 8)
             }
             .padding(.horizontal)
-            EmotionUIGroup(viewModel) // Emotion UI Mapping
+            EmotionGroup(viewModel)
+            Button("Show Controls") {
+                isSheetPresented = true
+            }
+            .padding()
         }
         .padding()
+        .sheet(isPresented: $isSheetPresented) {
+            PositionControlSheet(viewModel)
+        }
     }
 }
 
@@ -67,33 +66,44 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
-## EmotionUIGroup
+## Available emotion
 
-### struct EmotionGroup: View
-- Emotion UI Mapping
-- if `viewModel.emotionGroup` is null that will not be display.
+- Emotions the avatar support is stored at `viewModel.availableEmotion`
+- You can change the emotion of avatar by changing `viewModel.currentEmotion`
 
 ```swift
-struct EmotionUIGroup: View {
+struct EmotionGroup: View {
     @ObservedObject var viewModel: AvatarViewModel
-    
+    @State private var selectedEmotion = ""
+
     init(_ viewModel: AvatarViewModel) {
         self.viewModel = viewModel
     }
-    
+
     var body: some View {
         HStack {
-            if (viewModel.emotionGroup != nil) {
-                ForEach(Array(viewModel.emotionGroup!), id: \.0){ key, value in
-                    Button(key) {
-                        viewModel.currentEmotion = value
+            if (viewModel.availableEmotion != nil) {
+                Text("Emotion: ")
+                Picker(selection: $selectedEmotion, label: Text("Emotion")) {
+                    Text("---").tag("")
+                    ForEach(viewModel.availableEmotion!, id: \.self){
+                        Text($0)
                     }
-                }}
+                }.pickerStyle(MenuPickerStyle()).onChange(of: selectedEmotion) {
+                    selectedEmotion in
+                    if(selectedEmotion == "") {
+                        return
+                    }
+                    viewModel.currentEmotion = selectedEmotion
+                }
+                
+            }
         }
     }
 }
 ```
 
 ## Webview Configuration
+
 - if `Outgoing Connections (Client)` doesn't on, webview will not work!
-![Webview config](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/CleanShot%202023-06-16%20at%2019.05.51.png)
+  ![Webview config](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/CleanShot%202023-06-16%20at%2019.05.51.png)

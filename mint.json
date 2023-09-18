@@ -50,6 +50,11 @@
       "version": "v2"
     },
     {
+      "group": "Integration",
+      "pages": ["integration/swift"],
+      "version": "v2"
+    },
+    {
       "group": "Stack",
       "pages": ["stack/avatar", "stack/voice", "stack/llm"],
       "version": "v1"

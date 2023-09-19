@@ -10,17 +10,62 @@ Add Avatars Swift package from git.
 https://github.com/avatechgg/avatars-swift.git
 ```
 
-## Avatar Display on SwiftUI
+## How it works
 
+In order to make the Avatar SDK works in ios environment, we have built a simple frontend and wrap it up with `WKWebView`.
+All data input from ios app will be sent to the webview and takes effect after handling.
+
+Therefore, please turn on `Outgoing Connections (Client)`, otherwise webview will not work.
+![Webview config](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/CleanShot%202023-06-16%20at%2019.05.51.png)
+
+## The Code
+
+You need to first import the package and create a stateObject with `AvatarViewModel()`. It contain various data for creating the `AvatarView`.
+
+```swift
+import Avatars
+
+struct ContentView: View {
+    // Data the frontend needed to create the canvas.
+    @StateObject var viewModel = AvatarViewModel(
+        // The id of avatar you created
+        avatarId: "fb4051f8-5969-480f-b57b-fcfc66c5b6f6",
+
+        // Model position
+        x: 0,
+        y: 0,
+
+        // Model scale & rotation
+        scale: 1,
+        rotation: 0,
+
+        // For emotion setting
+        currentEmotion: ""
+    )
+}
+```
+
+Then you can create the `AvatarView` in body with the stateObject to create the canvas.
+
+```swift
+var body: some View {
+    VStack {
+        AvatarView(viewModel) // The canvas showing Avatar
+    }
+}
+```
+
+<Accordion title="Full example">
 ```swift
 import SwiftUI
 import Avatars
 
 struct ContentView: View {
-    @StateObject var viewModel = AvatarViewModel(
+@StateObject var viewModel = AvatarViewModel(
+        // The id of avatar you created
         avatarId: "fb4051f8-5969-480f-b57b-fcfc66c5b6f6",
 
-        // Model transition
+        // Model position
         x: 0,
         y: 0,
 
@@ -48,8 +93,6 @@ struct ContentView: View {
             }
             .padding(.horizontal)
 
-            EmotionGroup(viewModel)
-
             Button("Show Controls") {
                 isSheetPresented = true
             }
@@ -60,6 +103,7 @@ struct ContentView: View {
             PositionControlSheet(viewModel)
         }
     }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -68,12 +112,22 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 ```
+</Accordion>
 
-## Available emotion
+
+
+## Advance settings
+
+Avatars Swift package also support avatar interaction incluing audio lip-sync and emotions.
+
+<AccordionGroup>
+<Accordion title="Emotions">
 
 - Emotions the avatar support is stored at `viewModel.availableEmotion`
 - You can change the emotion of avatar by changing `viewModel.currentEmotion`
 - After changing the emotion, it will reset to neutral after serveal second.
+
+### Example
 
 ```swift
 struct EmotionGroup: View {
@@ -107,10 +161,72 @@ struct EmotionGroup: View {
 }
 ```
 
-## Webview Configuration
+</Accordion>
+<Accordion title="Lip-sync">
+You can import audio by changing the value of `audioSource` or `rawBase64Audio` from the stateObject.
 
-- if `Outgoing Connections (Client)` doesn't on, webview will not work!
-  ![Webview config](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/CleanShot%202023-06-16%20at%2019.05.51.png)
+If your audio source is an url, you should pass the string to the webview with `audioSource`.
+
+If your audio source is in data format, you should encode it with base64 format using `base64EncodedString()` and pass the data to the webview with `rawBase64Audio`.
+
+The audio will be played and lip-sync will start automatically once the value is changed. 
+
+If you send another audio to webview while previous audio is playing, webview will automatically store the new audio and play it after previous audio end.
+
+### Example
+
+```swift
+struct AudioGroup: View {
+
+    @ObservedObject var viewModel: AvatarViewModel
+    @State private var textInput = ""
+    @State private var isImporting: Bool = false
+    
+    init(_ viewModel: AvatarViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    var body: some View {
+        HStack {
+            // import audio url
+
+            TextField("Enter audio source", text: $textInput)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            Button("Send") {
+                viewModel.audioSource = textInput
+            }
+            .padding(.leading, 8)
+            
+            // import audio data
+            Button(action: {
+                isImporting.toggle()
+            }, label: {
+                Text("Import")
+            })
+        }.fileImporter(
+            isPresented: $isImporting,
+            allowedContentTypes: [UTType.audio],
+            allowsMultipleSelection: false
+        ) { result in
+            do {
+                guard let selectedFile: URL = try result.get().first else { return }
+                guard selectedFile.startAccessingSecurityScopedResource() else { return }
+                
+                let audioData =  try Data(contentsOf: selectedFile)
+                let encodedString = audioData.base64EncodedString()
+                
+                viewModel.rawBase64Audio = encodedString
+                
+                selectedFile.stopAccessingSecurityScopedResource()
+            } catch {
+                Swift.print(error.localizedDescription)
+            }
+        }
+    }
+}
+```
+</Accordion>
+</AccordionGroup>
 
 ## References
 
@@ -124,6 +240,6 @@ struct EmotionGroup: View {
 | `scale`            | Float    | The scale of the avatar. Default is set to '1'.                                                                                                                                                    |
 | `rotation`         | Float    | Set the value between 0 and 1 to rotate the avatar.                                                                                                                                                |
 | `currentEmotion`   | String   | The emotion avatar is currently showing. Changing this value to make the avatar express emotion. Emotions the avatar can express is stored at `availableEmotion`.                                  |
-| `availableEmotion` | String[] | An array of string containing all available emotion the avatar can express. Pass one of those string to currentEmotion will change the emotion.                                                       |
+| `availableEmotion` | String[] | An array of string containing all available emotion the avatar can express. Pass one of those string to currentEmotion will change the emotion.                                                    |
 | `audioSource`      | String   | The source of the audio, usually an Url. The audio will be played automatically once the value is changed.                                                                                         |
-| `rawBase64Audio`   | String   | The source of the audio which is encoded with Base64 format. Usually used with `base64EncodedString()` to encode the audio data. The audio will be played automatically once the value is changed. |
+| `rawBase64Audio`   | String   | The source of the audio which is encoded with Base64 format. Usually used with `base64EncodedString()` to encode the audio data. |

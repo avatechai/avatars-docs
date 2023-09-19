@@ -2,7 +2,7 @@
 title: Swift
 ---
 
-### Installation
+## Installation
 
 Add Avatars Swift package from git.
 
@@ -10,7 +10,7 @@ Add Avatars Swift package from git.
 https://github.com/avatechgg/avatars-swift.git
 ```
 
-### Avatar Display on SwiftUI
+## Avatar Display on SwiftUI
 
 ```swift
 import SwiftUI
@@ -22,7 +22,7 @@ struct ContentView: View {
 
         // Model transition
         x: 0,
-        y: 200,
+        y: 0,
 
         // Model scale & rotation
         scale: 1,
@@ -36,7 +36,8 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            AvatarView(viewModel)
+            AvatarView(viewModel) // The canvas showing Avatar
+
             HStack {
                 TextField("Enter audio source", text: $textInput)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -46,7 +47,9 @@ struct ContentView: View {
                 .padding(.leading, 8)
             }
             .padding(.horizontal)
+
             EmotionGroup(viewModel)
+
             Button("Show Controls") {
                 isSheetPresented = true
             }
@@ -70,6 +73,7 @@ struct ContentView_Previews: PreviewProvider {
 
 - Emotions the avatar support is stored at `viewModel.availableEmotion`
 - You can change the emotion of avatar by changing `viewModel.currentEmotion`
+- After changing the emotion, it will reset to neutral after serveal second.
 
 ```swift
 struct EmotionGroup: View {
@@ -96,7 +100,7 @@ struct EmotionGroup: View {
                     }
                     viewModel.currentEmotion = selectedEmotion
                 }
-                
+
             }
         }
     }
@@ -107,3 +111,19 @@ struct EmotionGroup: View {
 
 - if `Outgoing Connections (Client)` doesn't on, webview will not work!
   ![Webview config](https://avatech-avatar-dev1.nyc3.cdn.digitaloceanspaces.com/public-download/CleanShot%202023-06-16%20at%2019.05.51.png)
+
+## References
+
+### AvatarViewModel
+
+| Field              | Type     | Description                                                                                                                                                                                        |
+| ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `avatarId`         | String   | The id of the avatar you created. You can create you own avatar at [here](https://labs.avatech.ai)!                                                                                                |
+| `x`                | Float    | The position of the avatar on the x axis.                                                                                                                                                          |
+| `y`                | Float    | The position of the avatar on the y axis.                                                                                                                                                          |
+| `scale`            | Float    | The scale of the avatar. Default is set to '1'.                                                                                                                                                    |
+| `rotation`         | Float    | Set the value between 0 and 1 to rotate the avatar.                                                                                                                                                |
+| `currentEmotion`   | String   | The emotion avatar is currently showing. Changing this value to make the avatar express emotion. Emotions the avatar can express is stored at `availableEmotion`.                                  |
+| `availableEmotion` | String[] | An array of string containing all available emotion the avatar can express. Pass one of those string to currentEmotion will change the emotion.                                                       |
+| `audioSource`      | String   | The source of the audio, usually an Url. The audio will be played automatically once the value is changed.                                                                                         |
+| `rawBase64Audio`   | String   | The source of the audio which is encoded with Base64 format. Usually used with `base64EncodedString()` to encode the audio data. The audio will be played automatically once the value is changed. |

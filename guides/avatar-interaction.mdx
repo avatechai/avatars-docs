@@ -8,15 +8,15 @@ Avatars can interact with several ways:
 
 The avatars generated from [AvatarLabs](https://labs.avatech.ai) support real-time lip-sync based on audio provided to the SDK.
 
-To make your avatar start talking, you need to call `playAudioFromSource()` or `playAudioFromNode()` based on the audio type.
+To make your avatar start talking, you need to create an `AudioContext` and connect it to the SDK with `connectAudioContext`.
 
 ```jsx
 function App(){
     const {
         avatarDisplay,
-        avatarContext,
-        playAudioFromSource,
-        playAudioFromNode
+        connectAudioElement,
+        connectAudioContext,
+        connectAudioNode
     } = useAvatar({
         //...
     });
@@ -27,46 +27,25 @@ function App(){
         {avatarDisplay}
         <button
             onClick={() => {
-                const arrayBuffer = await fetch("audio.mp3")
-                    .then(async (res) => {
-                    const file = res.arrayBuffer();
-                    return file;
-                    })
-                    .catch((e) => console.error(e));
-
-                // if your audio is in file format,
-                // you need to convert it into array buffer first.
-
-                const audioBuffer =
-                    await audioContextRef.current.decodeAudioData(arrayBuffer);
-                const bs = audioContextRef.current.createBufferSource();
-                bs.buffer = audioBuffer;
-                playAudioFromNode(bs, audioContextRef.current);
+              connectAudioContext(audioContextRef.current)
             }}
         >
-            playAudioFromNode
-        </button>
-        <button
-            onClick={() => {
-                playAudioFromSource('audio.mp3', audioContextRef.current);
-                // both relative path and urls can be used with this method.
-            }}
-        >
-            playAudioFromSource
+            Connect AudioContext
         </button>
     );
 }
 ```
 
-<Info>
-  You can visit [here](./guides/nextjs-demo) for a complete demo shocasing how
-  our lip-sync system works!
-</Info>
 
-### Connect Audio Element
 
-If you want to adjust audio settings (For example, to adjust volume or adding eventlistener),
-you can create a new HTMLAudioElement and connect it to our sdk through the function `connectAudioElement()`:
+### Connect Audio
+
+After connecting AudioContext, you need to create a HTMLAudioElement or AudioNode and connect it to the SDK in order to sync the audio with lip-sync system.
+
+<Tabs>
+  <Tab title="HTMLAudioElement">
+
+After connection, when you play the audio from the HTMLAudioElement, the avatar will start lip-sync automatically.
 
 ```jsx
 const { avatarDisplay, context, connectAudioElement } = useAvatar({
@@ -84,10 +63,8 @@ return (
           connectAudioElement(audioPlayer.current, audioContextRef.current);
         }}
     >
-        Connect
+        Connect 
     </button>
-
-    // then when you play the audioPlayer, the avatar will start lip-sync automatically.
 
     <button
         onClick={() => {
@@ -99,11 +76,55 @@ return (
     </button>
 )
 ```
+  </Tab>
+  <Tab title="AudioNode">
 
-<Warning>
-  You cannot connect audio element after using `playAudioFromNode()` or
-  `playAudioFromSource()` to play audio.
-</Warning>
+    You need to connect the AudioNode to the SDK everytime a new audio file is uploaded.
+
+```jsx
+const { avatarDisplay, context, connectAudioNode } = useAvatar({
+  //...
+});
+
+//...
+
+return (
+    {avatarDisplay}
+
+    // upload audio file
+    <input
+        type="file"
+        onChange={(e) => {
+          setFile(e.target.files![0]);
+        }}
+      ></input>
+
+    // play audio from file
+    <button
+        onClick={() => {
+          const nf = await file!.arrayBuffer();
+
+          const audioBuffer = await audioContextRef.current.decodeAudioData(nf);
+          const bs = audioContextRef.current.createBufferSource();
+          bs.buffer = audioBuffer;
+
+          connectAudioNode(bs);
+          bs.start();
+        }}
+    >
+        Play
+    </button>
+)
+```
+
+
+  </Tab>
+</Tabs>
+
+<Info>
+  You can visit [here](./guides/nextjs-demo) for a complete demo shocasing how
+  our lip-sync system works!
+</Info>
 
 ## Expression
 
